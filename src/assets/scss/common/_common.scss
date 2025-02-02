@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $main-font;
+  font-size: 16px;
+  color: $color-light;
+  background-color: $color-dark;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.container {
+  @include container();
+}

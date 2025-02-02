@@ -1,0 +1,23 @@
+// fonts
+$main-font: 'Plus Jakarta Sans', sans-serif;
+$header-font: 'Manrope', sans-serif;
+
+// colors
+$color-light: #fff;
+$color-dark: #1a1a1a;
+$color-semidark: #232323;
+$color-accent: #bab0f6;
+$color-potted-btn: #2f9599;
+$color-missed-btn: #ec2049;
+
+// indents
+$gap: 30px;
+$gap-half: 15px;
+
+// breakpoints
+$mobile: 320px;
+$tablet: 768px;
+$desktop: 1280px;
+
+$mobile-max: $tablet - 1;
+$tablet-max: $desktop - 1;
