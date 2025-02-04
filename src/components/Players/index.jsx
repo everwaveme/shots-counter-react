@@ -1,29 +1,31 @@
 import { useState } from "react";
 
 function Players() {
-  const [editingFirstPlayer, setEditingFirstPlayer] = useState(false);
-  const [editingSecondPlayer, setEditingSecondPlayer] = useState(false);
-  const [firstPlayerName, setFirstPlayerName] = useState('Player 1');
-  const [secondPlayerName, setSecondPlayerName] = useState('Player 2');
-
-  //уменьшить количество стэйтов добавив объекты
+  const [editing, setEditing] = useState({
+    firstPlayer: false,
+    secondPlayer: false,
+  });
+  const [playerName, setPlayerName] = useState({
+    firstPlayer: 'Player 1',
+    secondPlayer: 'Player 2',
+  });
 
   return (
     <div className="container">
       <div className="players-wrap">
         <div className="players-info-box">
-          {!editingFirstPlayer ? (
+          {!editing.firstPlayer ? (
             <>
               <span className="players-name"
                 onClick={() => {
-                  setEditingFirstPlayer(true);
+                  setEditing({ ...editing, firstPlayer: true });
                 }}
               >
-                {firstPlayerName}
+                {playerName.firstPlayer}
               </span>
               <button className="players-edit-btn"
                 onClick={() => {
-                  setEditingFirstPlayer(true);
+                  setEditing({ ...editing, firstPlayer: true });
                 }}
               >
               </button>
@@ -32,14 +34,14 @@ function Players() {
             <>
               <input className="players-input"
                 placeholder="Enter Name"
-                value={firstPlayerName}
+                value={playerName.firstPlayer}
                 onChange={(e) => {
-                  setFirstPlayerName(e.target.value);
+                  setPlayerName({ ...playerName, firstPlayer: e.target.value });
                 }}
               />
               <button className="players-save-btn"
                 onClick={() => {
-                  setEditingFirstPlayer(false);
+                  setEditing({ ...editing, firstPlayer: false });
                 }}
               >
               </button>
@@ -53,18 +55,18 @@ function Players() {
         </div>
 
         <div className="players-info-box">
-          {!editingSecondPlayer ? (
+          {!editing.secondPlayer ? (
             <>
               <span className="players-name"
                 onClick={() => {
-                  setEditingSecondPlayer(true);
+                  setEditing({ ...editing, secondPlayer: true });
                 }}
               >
-                {secondPlayerName}
+                {playerName.secondPlayer}
               </span>
               <button className="players-edit-btn"
                 onClick={() => {
-                  setEditingSecondPlayer(true);
+                  setEditing({ ...editing, secondPlayer: true });
                 }}
               >
               </button>
@@ -73,21 +75,20 @@ function Players() {
             <>
               <input className="players-input"
                 placeholder="Enter Name"
-                value={secondPlayerName}
+                value={playerName.secondPlayer}
                 onChange={(e) => {
-                  setSecondPlayerName(e.target.value);
+                  setPlayerName({ ...playerName, secondPlayer: e.target.value });
                 }}
               />
               <button className="players-save-btn"
                 onClick={() => {
-                  setEditingSecondPlayer(false);
+                  setEditing({ ...editing, secondPlayer: false });
                 }}
               >
               </button>
             </>
           )}
         </div>
-
       </div>
     </div>
   );
