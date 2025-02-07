@@ -95,3 +95,53 @@
   font-weight: 500;
   color: $color-accent;
 }
+
+.stats-reset-btn-wrap {
+  flex-basis: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stats-reset-btn,
+.stats-reset-all-btn {
+  display: block;
+  width: 140px;
+  height: 35px;
+  font-family: $main-font;
+  font-size: 16px;
+  font-weight: 600;
+  color: $color-light;
+  border: none;
+  background: transparent;
+  background-color: $color-accent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .1s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+
+.stats-reset-btn {
+  background-color: transparent;
+  border: 2px solid $color-accent;
+
+  &:hover {
+    background-color: $color-accent;
+  }
+
+  &:active {
+    opacity: .7;
+    transform: translateY(1px);
+  }
+}
+
+.stats-reset-all-btn {
+  &:hover {
+    background-color: transparent;
+    border: 2px solid $color-accent;
+  }
+
+  &:active {
+    opacity: .7;
+    transform: translateY(1px);
+  }
+}

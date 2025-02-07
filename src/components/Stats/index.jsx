@@ -157,6 +157,26 @@ function Stats() {
           </div>
         </div>
 
+        {/* RESET BUTTONS */}
+        <div className="stats-card">
+          <div className="stats-reset-btn-wrap">
+            <button className="stats-reset-btn">
+              Reset
+            </button>
+          </div>
+
+          <div className="stats-reset-btn-wrap">
+            <button className="stats-reset-all-btn">
+              Reset All
+            </button>
+          </div>
+
+          <div className="stats-reset-btn-wrap">
+            <button className="stats-reset-btn">
+              Reset
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
