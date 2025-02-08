@@ -1,6 +1,91 @@
-
+import { useState, useEffect } from "react";
 
 function Stats() {
+  //First player stats state
+  const [firstPlayerStats, setFirstPlayerStats] = useState({
+    potSuccess: {
+      potted: 0,
+      allShots: 0,
+    },
+  });
+
+  const [firstPlayerPer, setFirstPlayerPer] = useState({
+    potSuccessPer: 0,
+
+  });
+
+  useEffect(() => {
+    setFirstPlayerPer({
+      ...firstPlayerPer,
+      potSuccessPer: firstPlayerStats.potSuccess.potted / firstPlayerStats.potSuccess.allShots * 100 || 0,
+    });
+  }, [firstPlayerStats]);
+
+
+  //Second player stats state
+  const [secondPlayerStats, setSecondPlayerStats] = useState({
+    potSuccess: {
+      potted: 0,
+      allShots: 0,
+    },
+  });
+
+  const [secondPlayerPer, setSecondPlayerPer] = useState({
+    potSuccessPer: 0,
+  });
+
+  useEffect(() => {
+    setSecondPlayerPer({
+      ...secondPlayerPer,
+      potSuccessPer: secondPlayerStats.potSuccess.potted / secondPlayerStats.potSuccess.allShots * 100 || 0,
+    });
+  }, [secondPlayerStats])
+
+  //First player onClick funcs
+  const firstPlayerPottedClick = () => {
+    setFirstPlayerStats({
+      ...firstPlayerStats,
+      potSuccess: {
+        ...firstPlayerStats.potSuccess,
+        potted: firstPlayerStats.potSuccess.potted + 1,
+        allShots: firstPlayerStats.potSuccess.allShots + 1,
+      }
+    });
+  }
+
+  const firstPlayerMissedClick = () => {
+    setFirstPlayerStats({
+      ...firstPlayerStats,
+      potSuccess: {
+        ...firstPlayerStats.potSuccess,
+        allShots: firstPlayerStats.potSuccess.allShots + 1,
+      }
+    });
+  };
+
+  //Second player onClick funcs
+  const secondPlayerPottedClick = () => {
+    setSecondPlayerStats({
+      ...secondPlayerStats,
+      potSuccess: {
+        ...secondPlayerStats.potSuccess,
+        potted: secondPlayerStats.potSuccess.potted + 1,
+        allShots: secondPlayerStats.potSuccess.allShots + 1,
+      }
+    });
+  }
+
+  const secondPlayerMissedClick = () => {
+    setSecondPlayerStats({
+      ...secondPlayerStats,
+      potSuccess: {
+        ...secondPlayerStats.potSuccess,
+        allShots: secondPlayerStats.potSuccess.allShots + 1,
+      }
+    });
+  }
+
+
   return (
     <section className="stats">
       <div className="container">
@@ -9,12 +94,19 @@ function Stats() {
         <div className="stats-card">
           <div className="stats-player">
             <span className="stats-player-info">
-              0% (0/0)
+              {firstPlayerPer.potSuccessPer.toFixed(2)}%
+              ({firstPlayerStats.potSuccess.potted}/{firstPlayerStats.potSuccess.allShots})
             </span>
             <div className="stats-player-btns">
-              <button className="stats-potted-btn">
+              <button
+                className="stats-potted-btn"
+                onClick={firstPlayerPottedClick}
+              >
               </button>
-              <button className="stats-missed-btn">
+              <button
+                className="stats-missed-btn"
+                onClick={firstPlayerMissedClick}
+              >
               </button>
             </div>
           </div>
@@ -27,12 +119,19 @@ function Stats() {
 
           <div className="stats-player">
             <span className="stats-player-info">
-              0% (0/0)
+              {secondPlayerPer.potSuccessPer.toFixed(2)}%
+              ({secondPlayerStats.potSuccess.potted}/{secondPlayerStats.potSuccess.allShots})
             </span>
             <div className="stats-player-btns">
-              <button className="stats-potted-btn">
+              <button
+                className="stats-potted-btn"
+                onClick={secondPlayerPottedClick}
+              >
               </button>
-              <button className="stats-missed-btn">
+              <button
+                className="stats-missed-btn"
+                onClick={secondPlayerMissedClick}
+              >
               </button>
             </div>
           </div>
@@ -137,6 +236,7 @@ function Stats() {
           </div>
         </div>
 
+        {/* ALL POTTED BALLS */}
         <div className="stats-card">
           <div className="stats-player">
             <span className="stats-player-info all-potted-balls-info">
