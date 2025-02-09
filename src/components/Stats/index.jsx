@@ -7,20 +7,24 @@ function Stats() {
       potted: 0,
       allShots: 0,
     },
+    longPotSuccess: {
+      potted: 0,
+      allShots: 0,
+    }
   });
 
   const [firstPlayerPer, setFirstPlayerPer] = useState({
     potSuccessPer: 0,
-
+    longPotSuccessPer: 0,
   });
 
   useEffect(() => {
     setFirstPlayerPer({
       ...firstPlayerPer,
       potSuccessPer: firstPlayerStats.potSuccess.potted / firstPlayerStats.potSuccess.allShots * 100 || 0,
+      longPotSuccessPer: firstPlayerStats.longPotSuccess.potted / firstPlayerStats.longPotSuccess.allShots * 100 || 0,
     });
   }, [firstPlayerStats]);
-
 
   //Second player stats state
   const [secondPlayerStats, setSecondPlayerStats] = useState({
@@ -28,62 +32,24 @@ function Stats() {
       potted: 0,
       allShots: 0,
     },
+    longPotSuccess: {
+      potted: 0,
+      allShots: 0,
+    }
   });
 
   const [secondPlayerPer, setSecondPlayerPer] = useState({
     potSuccessPer: 0,
+    longPotSuccessPer: 0,
   });
 
   useEffect(() => {
     setSecondPlayerPer({
       ...secondPlayerPer,
       potSuccessPer: secondPlayerStats.potSuccess.potted / secondPlayerStats.potSuccess.allShots * 100 || 0,
+      longPotSuccessPer: secondPlayerStats.longPotSuccess.potted / secondPlayerStats.longPotSuccess.allShots * 100 || 0,
     });
   }, [secondPlayerStats])
-
-  //First player onClick funcs
-  const firstPlayerPottedClick = () => {
-    setFirstPlayerStats({
-      ...firstPlayerStats,
-      potSuccess: {
-        ...firstPlayerStats.potSuccess,
-        potted: firstPlayerStats.potSuccess.potted + 1,
-        allShots: firstPlayerStats.potSuccess.allShots + 1,
-      }
-    });
-  }
-
-  const firstPlayerMissedClick = () => {
-    setFirstPlayerStats({
-      ...firstPlayerStats,
-      potSuccess: {
-        ...firstPlayerStats.potSuccess,
-        allShots: firstPlayerStats.potSuccess.allShots + 1,
-      }
-    });
-  };
-
-  //Second player onClick funcs
-  const secondPlayerPottedClick = () => {
-    setSecondPlayerStats({
-      ...secondPlayerStats,
-      potSuccess: {
-        ...secondPlayerStats.potSuccess,
-        potted: secondPlayerStats.potSuccess.potted + 1,
-        allShots: secondPlayerStats.potSuccess.allShots + 1,
-      }
-    });
-  }
-
-  const secondPlayerMissedClick = () => {
-    setSecondPlayerStats({
-      ...secondPlayerStats,
-      potSuccess: {
-        ...secondPlayerStats.potSuccess,
-        allShots: secondPlayerStats.potSuccess.allShots + 1,
-      }
-    });
-  }
 
 
   return (
@@ -100,12 +66,29 @@ function Stats() {
             <div className="stats-player-btns">
               <button
                 className="stats-potted-btn"
-                onClick={firstPlayerPottedClick}
+                onClick={() => {
+                  setFirstPlayerStats({
+                    ...firstPlayerStats,
+                    potSuccess: {
+                      ...firstPlayerStats.potSuccess,
+                      potted: firstPlayerStats.potSuccess.potted + 1,
+                      allShots: firstPlayerStats.potSuccess.allShots + 1,
+                    }
+                  })
+                }}
               >
               </button>
               <button
                 className="stats-missed-btn"
-                onClick={firstPlayerMissedClick}
+                onClick={() => {
+                  setFirstPlayerStats({
+                    ...firstPlayerStats,
+                    potSuccess: {
+                      ...firstPlayerStats.potSuccess,
+                      allShots: firstPlayerStats.potSuccess.allShots + 1,
+                    }
+                  })
+                }}
               >
               </button>
             </div>
@@ -125,12 +108,29 @@ function Stats() {
             <div className="stats-player-btns">
               <button
                 className="stats-potted-btn"
-                onClick={secondPlayerPottedClick}
+                onClick={() => {
+                  setSecondPlayerStats({
+                    ...secondPlayerStats,
+                    potSuccess: {
+                      ...secondPlayerStats.potSuccess,
+                      potted: secondPlayerStats.potSuccess.potted + 1,
+                      allShots: secondPlayerStats.potSuccess.allShots + 1,
+                    }
+                  })
+                }}
               >
               </button>
               <button
                 className="stats-missed-btn"
-                onClick={secondPlayerMissedClick}
+                onClick={() => {
+                  setSecondPlayerStats({
+                    ...secondPlayerStats,
+                    potSuccess: {
+                      ...secondPlayerStats.potSuccess,
+                      allShots: secondPlayerStats.potSuccess.allShots + 1,
+                    }
+                  })
+                }}
               >
               </button>
             </div>
@@ -141,12 +141,43 @@ function Stats() {
         <div className="stats-card">
           <div className="stats-player">
             <span className="stats-player-info">
-              0% (0/0)
+              {firstPlayerPer.longPotSuccessPer.toFixed(2)}%
+              ({firstPlayerStats.longPotSuccess.potted}/{firstPlayerStats.longPotSuccess.allShots})
             </span>
             <div className="stats-player-btns">
-              <button className="stats-potted-btn">
+              <button className="stats-potted-btn"
+                onClick={() => {
+                  setFirstPlayerStats({
+                    ...firstPlayerStats,
+                    potSuccess: {
+                      ...firstPlayerStats.potSuccess,
+                      potted: firstPlayerStats.potSuccess.potted + 1,
+                      allShots: firstPlayerStats.potSuccess.allShots + 1,
+                    },
+                    longPotSuccess: {
+                      ...firstPlayerStats.longPotSuccess,
+                      potted: firstPlayerStats.longPotSuccess.potted + 1,
+                      allShots: firstPlayerStats.longPotSuccess.allShots + 1,
+                    }
+                  })
+                }}
+              >
               </button>
-              <button className="stats-missed-btn">
+              <button className="stats-missed-btn"
+                onClick={() => {
+                  setFirstPlayerStats({
+                    ...firstPlayerStats,
+                    potSuccess: {
+                      ...firstPlayerStats.potSuccess,
+                      allShots: firstPlayerStats.potSuccess.allShots + 1,
+                    },
+                    longPotSuccess: {
+                      ...firstPlayerStats.longPotSuccess,
+                      allShots: firstPlayerStats.longPotSuccess.allShots + 1,
+                    }
+                  })
+                }}
+              >
               </button>
             </div>
           </div>
@@ -159,12 +190,43 @@ function Stats() {
 
           <div className="stats-player">
             <span className="stats-player-info">
-              0% (0/0)
+              {secondPlayerPer.longPotSuccessPer.toFixed(2)}%
+              ({secondPlayerStats.longPotSuccess.potted}/{secondPlayerStats.longPotSuccess.allShots})
             </span>
             <div className="stats-player-btns">
-              <button className="stats-potted-btn">
+              <button className="stats-potted-btn"
+                onClick={() => {
+                  setSecondPlayerStats({
+                    ...secondPlayerStats,
+                    potSuccess: {
+                      ...secondPlayerStats.potSuccess,
+                      potted: secondPlayerStats.potSuccess.potted + 1,
+                      allShots: secondPlayerStats.potSuccess.allShots + 1,
+                    },
+                    longPotSuccess: {
+                      ...secondPlayerStats.longPotSuccess,
+                      potted: secondPlayerStats.longPotSuccess.potted + 1,
+                      allShots: secondPlayerStats.longPotSuccess.allShots + 1,
+                    }
+                  })
+                }}
+              >
               </button>
-              <button className="stats-missed-btn">
+              <button className="stats-missed-btn"
+                onClick={() => {
+                  setSecondPlayerStats({
+                    ...secondPlayerStats,
+                    potSuccess: {
+                      ...secondPlayerStats.potSuccess,
+                      allShots: secondPlayerStats.potSuccess.allShots + 1,
+                    },
+                    longPotSuccess: {
+                      ...secondPlayerStats.longPotSuccess,
+                      allShots: secondPlayerStats.longPotSuccess.allShots + 1,
+                    }
+                  })
+                }}
+              >
               </button>
             </div>
           </div>
