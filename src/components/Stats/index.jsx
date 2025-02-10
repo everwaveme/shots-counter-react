@@ -10,12 +10,22 @@ function Stats() {
     longPotSuccess: {
       potted: 0,
       allShots: 0,
+    },
+    restPotSuccess: {
+      potted: 0,
+      allShots: 0,
+    },
+    safetySuccess: {
+      success: 0,
+      allShots: 0,
     }
   });
 
   const [firstPlayerPer, setFirstPlayerPer] = useState({
     potSuccessPer: 0,
     longPotSuccessPer: 0,
+    restPotSuccessPer: 0,
+    safetySuccessPer: 0,
   });
 
   useEffect(() => {
@@ -23,6 +33,8 @@ function Stats() {
       ...firstPlayerPer,
       potSuccessPer: firstPlayerStats.potSuccess.potted / firstPlayerStats.potSuccess.allShots * 100 || 0,
       longPotSuccessPer: firstPlayerStats.longPotSuccess.potted / firstPlayerStats.longPotSuccess.allShots * 100 || 0,
+      restPotSuccessPer: firstPlayerStats.restPotSuccess.potted / firstPlayerStats.restPotSuccess.allShots * 100 || 0,
+      safetySuccessPer: firstPlayerStats.safetySuccess.success / firstPlayerStats.safetySuccess.allShots * 100 || 0,
     });
   }, [firstPlayerStats]);
 
@@ -35,12 +47,22 @@ function Stats() {
     longPotSuccess: {
       potted: 0,
       allShots: 0,
+    },
+    restPotSuccess: {
+      potted: 0,
+      allShots: 0,
+    },
+    safetySuccess: {
+      success: 0,
+      allShots: 0,
     }
   });
 
   const [secondPlayerPer, setSecondPlayerPer] = useState({
     potSuccessPer: 0,
     longPotSuccessPer: 0,
+    restPotSuccessPer: 0,
+    safetySuccessPer: 0,
   });
 
   useEffect(() => {
@@ -48,9 +70,68 @@ function Stats() {
       ...secondPlayerPer,
       potSuccessPer: secondPlayerStats.potSuccess.potted / secondPlayerStats.potSuccess.allShots * 100 || 0,
       longPotSuccessPer: secondPlayerStats.longPotSuccess.potted / secondPlayerStats.longPotSuccess.allShots * 100 || 0,
+      restPotSuccessPer: secondPlayerStats.restPotSuccess.potted / secondPlayerStats.restPotSuccess.allShots * 100 || 0,
+      safetySuccessPer: secondPlayerStats.safetySuccess.success / secondPlayerStats.safetySuccess.allShots * 100 || 0,
     });
-  }, [secondPlayerStats])
+  }, [secondPlayerStats]);
 
+  //Reset buttons
+  const resetFirstPlayerStats = () => {
+    setFirstPlayerStats({
+      ...firstPlayerStats,
+      potSuccess: {
+        ...firstPlayerStats.potSuccess,
+        potted: 0,
+        allShots: 0,
+      },
+      longPotSuccess: {
+        ...firstPlayerStats.longPotSuccess,
+        potted: 0,
+        allShots: 0,
+      },
+      restPotSuccess: {
+        ...firstPlayerStats.restPotSuccess,
+        potted: 0,
+        allShots: 0,
+      },
+      safetySuccess: {
+        ...firstPlayerStats.safetySuccess,
+        success: 0,
+        allShots: 0,
+      },
+    });
+  };
+
+  const resetSecondPlayerStats = () => {
+    setSecondPlayerStats({
+      ...secondPlayerStats,
+      potSuccess: {
+        ...secondPlayerStats.potSuccess,
+        potted: 0,
+        allShots: 0,
+      },
+      longPotSuccess: {
+        ...secondPlayerStats.longPotSuccess,
+        potted: 0,
+        allShots: 0,
+      },
+      restPotSuccess: {
+        ...secondPlayerStats.restPotSuccess,
+        potted: 0,
+        allShots: 0,
+      },
+      safetySuccess: {
+        ...secondPlayerStats.safetySuccess,
+        success: 0,
+        allShots: 0,
+      },
+    });
+  };
+
+  const resetAllStats = () => {
+    resetFirstPlayerStats();
+    resetSecondPlayerStats();
+  };
 
   return (
     <section className="stats">
@@ -74,7 +155,7 @@ function Stats() {
                       potted: firstPlayerStats.potSuccess.potted + 1,
                       allShots: firstPlayerStats.potSuccess.allShots + 1,
                     }
-                  })
+                  });
                 }}
               >
               </button>
@@ -87,7 +168,7 @@ function Stats() {
                       ...firstPlayerStats.potSuccess,
                       allShots: firstPlayerStats.potSuccess.allShots + 1,
                     }
-                  })
+                  });
                 }}
               >
               </button>
@@ -116,7 +197,7 @@ function Stats() {
                       potted: secondPlayerStats.potSuccess.potted + 1,
                       allShots: secondPlayerStats.potSuccess.allShots + 1,
                     }
-                  })
+                  });
                 }}
               >
               </button>
@@ -129,7 +210,7 @@ function Stats() {
                       ...secondPlayerStats.potSuccess,
                       allShots: secondPlayerStats.potSuccess.allShots + 1,
                     }
-                  })
+                  });
                 }}
               >
               </button>
@@ -159,7 +240,7 @@ function Stats() {
                       potted: firstPlayerStats.longPotSuccess.potted + 1,
                       allShots: firstPlayerStats.longPotSuccess.allShots + 1,
                     }
-                  })
+                  });
                 }}
               >
               </button>
@@ -175,7 +256,7 @@ function Stats() {
                       ...firstPlayerStats.longPotSuccess,
                       allShots: firstPlayerStats.longPotSuccess.allShots + 1,
                     }
-                  })
+                  });
                 }}
               >
               </button>
@@ -208,7 +289,7 @@ function Stats() {
                       potted: secondPlayerStats.longPotSuccess.potted + 1,
                       allShots: secondPlayerStats.longPotSuccess.allShots + 1,
                     }
-                  })
+                  });
                 }}
               >
               </button>
@@ -224,7 +305,7 @@ function Stats() {
                       ...secondPlayerStats.longPotSuccess,
                       allShots: secondPlayerStats.longPotSuccess.allShots + 1,
                     }
-                  })
+                  });
                 }}
               >
               </button>
@@ -236,12 +317,43 @@ function Stats() {
         <div className="stats-card">
           <div className="stats-player">
             <span className="stats-player-info">
-              0% (0/0)
+              {firstPlayerPer.restPotSuccessPer.toFixed(2)}%
+              ({firstPlayerStats.restPotSuccess.potted}/{firstPlayerStats.restPotSuccess.allShots})
             </span>
             <div className="stats-player-btns">
-              <button className="stats-potted-btn">
+              <button className="stats-potted-btn"
+                onClick={() => {
+                  setFirstPlayerStats({
+                    ...firstPlayerStats,
+                    potSuccess: {
+                      ...firstPlayerStats.potSuccess,
+                      potted: firstPlayerStats.potSuccess.potted + 1,
+                      allShots: firstPlayerStats.potSuccess.allShots + 1,
+                    },
+                    restPotSuccess: {
+                      ...firstPlayerStats.restPotSuccess,
+                      potted: firstPlayerStats.restPotSuccess.potted + 1,
+                      allShots: firstPlayerStats.restPotSuccess.allShots + 1,
+                    }
+                  });
+                }}
+              >
               </button>
-              <button className="stats-missed-btn">
+              <button className="stats-missed-btn"
+                onClick={() => {
+                  setFirstPlayerStats({
+                    ...firstPlayerStats,
+                    potSuccess: {
+                      ...firstPlayerStats.potSuccess,
+                      allShots: firstPlayerStats.potSuccess.allShots + 1,
+                    },
+                    restPotSuccess: {
+                      ...firstPlayerStats.restPotSuccess,
+                      allShots: firstPlayerStats.restPotSuccess.allShots + 1,
+                    }
+                  });
+                }}
+              >
               </button>
             </div>
           </div>
@@ -254,12 +366,43 @@ function Stats() {
 
           <div className="stats-player">
             <span className="stats-player-info">
-              0% (0/0)
+              {secondPlayerPer.restPotSuccessPer.toFixed(2)}%
+              ({secondPlayerStats.restPotSuccess.potted}/{secondPlayerStats.restPotSuccess.allShots})
             </span>
             <div className="stats-player-btns">
-              <button className="stats-potted-btn">
+              <button className="stats-potted-btn"
+                onClick={() => {
+                  setSecondPlayerStats({
+                    ...secondPlayerStats,
+                    potSuccess: {
+                      ...secondPlayerStats.potSuccess,
+                      potted: secondPlayerStats.potSuccess.potted + 1,
+                      allShots: secondPlayerStats.potSuccess.allShots + 1,
+                    },
+                    restPotSuccess: {
+                      ...secondPlayerStats.restPotSuccess,
+                      potted: secondPlayerStats.restPotSuccess.potted + 1,
+                      allShots: secondPlayerStats.restPotSuccess.allShots + 1,
+                    }
+                  });
+                }}
+              >
               </button>
-              <button className="stats-missed-btn">
+              <button className="stats-missed-btn"
+                onClick={() => {
+                  setSecondPlayerStats({
+                    ...secondPlayerStats,
+                    potSuccess: {
+                      ...secondPlayerStats.potSuccess,
+                      allShots: secondPlayerStats.potSuccess.allShots + 1,
+                    },
+                    restPotSuccess: {
+                      ...secondPlayerStats.restPotSuccess,
+                      allShots: secondPlayerStats.restPotSuccess.allShots + 1,
+                    }
+                  });
+                }}
+              >
               </button>
             </div>
           </div>
@@ -269,12 +412,34 @@ function Stats() {
         <div className="stats-card">
           <div className="stats-player">
             <span className="stats-player-info">
-              0% (0/0)
+              {firstPlayerPer.safetySuccessPer.toFixed(2)}%
+              ({firstPlayerStats.safetySuccess.success}/{firstPlayerStats.safetySuccess.allShots})
             </span>
             <div className="stats-player-btns">
-              <button className="stats-potted-btn">
+              <button className="stats-potted-btn"
+                onClick={() => {
+                  setFirstPlayerStats({
+                    ...firstPlayerStats,
+                    safetySuccess: {
+                      ...firstPlayerStats.safetySuccess,
+                      success: firstPlayerStats.safetySuccess.success + 1,
+                      allShots: firstPlayerStats.safetySuccess.allShots + 1,
+                    }
+                  });
+                }}
+              >
               </button>
-              <button className="stats-missed-btn">
+              <button className="stats-missed-btn"
+                onClick={() => {
+                  setFirstPlayerStats({
+                    ...firstPlayerStats,
+                    safetySuccess: {
+                      ...firstPlayerStats.safetySuccess,
+                      allShots: firstPlayerStats.safetySuccess.allShots + 1,
+                    }
+                  });
+                }}
+              >
               </button>
             </div>
           </div>
@@ -287,12 +452,34 @@ function Stats() {
 
           <div className="stats-player">
             <span className="stats-player-info">
-              0% (0/0)
+              {secondPlayerPer.safetySuccessPer.toFixed(2)}%
+              ({secondPlayerStats.safetySuccess.success}/{secondPlayerStats.safetySuccess.allShots})
             </span>
             <div className="stats-player-btns">
-              <button className="stats-potted-btn">
+              <button className="stats-potted-btn"
+                onClick={() => {
+                  setSecondPlayerStats({
+                    ...secondPlayerStats,
+                    safetySuccess: {
+                      ...secondPlayerStats.safetySuccess,
+                      success: secondPlayerStats.safetySuccess.success + 1,
+                      allShots: secondPlayerStats.safetySuccess.allShots + 1,
+                    }
+                  });
+                }}
+              >
               </button>
-              <button className="stats-missed-btn">
+              <button className="stats-missed-btn"
+                onClick={() => {
+                  setSecondPlayerStats({
+                    ...secondPlayerStats,
+                    safetySuccess: {
+                      ...secondPlayerStats.safetySuccess,
+                      allShots: secondPlayerStats.safetySuccess.allShots + 1,
+                    }
+                  });
+                }}
+              >
               </button>
             </div>
           </div>
@@ -302,7 +489,7 @@ function Stats() {
         <div className="stats-card">
           <div className="stats-player">
             <span className="stats-player-info all-potted-balls-info">
-              0
+              {firstPlayerStats.potSuccess.potted}
             </span>
           </div>
 
@@ -314,7 +501,7 @@ function Stats() {
 
           <div className="stats-player">
             <span className="stats-player-info all-potted-balls-info">
-              0
+              {secondPlayerStats.potSuccess.potted}
             </span>
           </div>
         </div>
@@ -322,19 +509,25 @@ function Stats() {
         {/* RESET BUTTONS */}
         <div className="stats-card">
           <div className="stats-reset-btn-wrap">
-            <button className="stats-reset-btn">
+            <button className="stats-reset-btn"
+              onClick={resetFirstPlayerStats}
+            >
               Reset
             </button>
           </div>
 
           <div className="stats-reset-btn-wrap">
-            <button className="stats-reset-all-btn">
+            <button className="stats-reset-all-btn"
+              onClick={resetAllStats}
+            >
               Reset All
             </button>
           </div>
 
           <div className="stats-reset-btn-wrap">
-            <button className="stats-reset-btn">
+            <button className="stats-reset-btn"
+              onClick={resetSecondPlayerStats}
+            >
               Reset
             </button>
           </div>
