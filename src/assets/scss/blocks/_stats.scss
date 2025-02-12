@@ -1,6 +1,11 @@
 .stats {
   margin: -20px 0;
   padding: 20px 0;
+
+  @media (max-width: $mobile-max) {
+    margin: -15px 0;
+    padding: 15px 0;
+  }
 }
 
 .stats-card {
@@ -11,6 +16,11 @@
   padding: 30px;
   background-color: $color-semidark;
   border-radius: 10px;
+
+  @media (max-width: $mobile-max) {
+    margin: 15px 0;
+    padding: 20px;
+  }
 }
 
 .stats-player {
@@ -20,12 +30,21 @@
   justify-content: center;
   align-items: center;
   // border: 1px solid aqua;
+
+  @media (max-width: $mobile-max) {}
 }
 
 .stats-player-info {
   margin-bottom: 20px;
   font-size: 18px;
   font-weight: 600;
+  text-align: center;
+
+  @media (max-width: $mobile-max) {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+  }
 }
 
 .stats-player-info.all-potted-balls-info {
@@ -42,7 +61,6 @@
 .stats-potted-btn,
 .stats-missed-btn {
   display: block;
-  margin: 0 7px;
   width: 60px;
   height: 30px;
   border: none;
@@ -52,9 +70,16 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all .1s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+
+  @media (max-width: $mobile-max) {
+    width: 40px;
+    height: 23px;
+    border-radius: 7px;
+  }
 }
 
 .stats-potted-btn {
+  margin-right: 14px;
   background-color: $color-potted-btn;
   background-image: url(../../potted-icon.png);
   background-size: 15px;
@@ -66,6 +91,11 @@
   &:active {
     opacity: .7;
     transform: translateY(1px);
+  }
+
+  @media (max-width: $mobile-max) {
+    margin-right: 10px;
+    background-size: 12px;
   }
 }
 
@@ -82,18 +112,31 @@
     opacity: .7;
     transform: translateY(1px);
   }
+
+  @media (max-width: $mobile-max) {
+    background-size: 11px;
+  }
 }
 
 .stats-text {
   flex-basis: 20%;
   margin: 0 20px;
   text-align: center;
+
+  @media (max-width: $mobile-max) {
+    margin: 0 15px;
+  }
+
 }
 
 .stats-title {
   font-size: 16px;
   font-weight: 500;
   color: $color-accent;
+
+  @media (max-width: $mobile-max) {
+    font-size: 14px;
+  }
 }
 
 .stats-reset-btn-wrap {
@@ -101,12 +144,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: $mobile-max) {
+    
+  }
 }
 
 .stats-reset-btn,
 .stats-reset-all-btn {
   display: block;
-  width: 140px;
+  max-width: 140px;
+  width: 100%;
   height: 35px;
   font-family: $main-font;
   font-size: 16px;
@@ -118,6 +166,14 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all .1s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+
+  @media (max-width: $mobile-max) {
+    max-width: 100px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 7px;
+  }
 }
 
 .stats-reset-btn {
@@ -143,5 +199,9 @@
   &:active {
     opacity: .8;
     transform: translateY(1px);
+  }
+
+  @media (max-width: $mobile-max) {
+    margin: 0 5px;
   }
 }

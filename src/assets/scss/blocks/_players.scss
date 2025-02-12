@@ -1,5 +1,9 @@
 .players {
   padding: 20px 0;
+
+  @media (max-width: $mobile-max) {
+    padding: 15px 0;
+  }
 }
 
 .players-wrap {
@@ -26,6 +30,10 @@
   font-size: 20px;
   font-weight: 700;
   text-align: center;
+
+  @media (max-width: $mobile-max) {
+    font-size: 18px;
+  }
 }
 
 .players-edit-btn,
@@ -69,6 +77,10 @@
     border: 2px solid rgba($color-accent, 1);
     box-shadow: 0 0 10px rgba($color-accent, .3);
   }
+
+  @media (max-width: $mobile-max) {
+    font-size: 16px;
+  }
 }
 
 .players-vs-wrap {
@@ -77,6 +89,10 @@
   justify-content: center;
   align-items: center;
   margin: 0 20px;
+
+  @media (max-width: $mobile-max) {
+    margin: 0 15px;
+  }
 }
 
 .players-vs-icon {
@@ -86,4 +102,9 @@
   background-position: center;
   background-size: contain;
   background-image: url('../../vs-icon.png');
+
+  @media (max-width: $mobile-max) {
+    width: 10px;
+    height: 10px;
+  }
 }
