@@ -29,9 +29,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // border: 1px solid aqua;
-
-  @media (max-width: $mobile-max) {}
 }
 
 .stats-player-info {
@@ -124,9 +121,8 @@
   text-align: center;
 
   @media (max-width: $mobile-max) {
-    margin: 0 15px;
+    margin: 0 10px;
   }
-
 }
 
 .stats-title {
@@ -144,10 +140,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @media (max-width: $mobile-max) {
-    
-  }
 }
 
 .stats-reset-btn,

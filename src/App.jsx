@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Players from "./components/Players";
 import Stats from "./components/Stats";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <Header />
       <Players />
       <Stats />
-      
+      <Footer />
     </div>
   );
 }

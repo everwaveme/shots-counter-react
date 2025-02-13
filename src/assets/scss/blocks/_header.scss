@@ -1,5 +1,9 @@
 .header {
   padding: 35px 0;
+
+  @media (max-width: $mobile-max) {
+    padding: 30px 0;
+  }
 }
 
 .header-wrap {
@@ -31,5 +35,10 @@
 
   &:hover {
     opacity: .8;
+  }
+
+  @media (max-width: $mobile-max) {
+    font-size: 20px;
+    font-weight: 600;
   }
 }
