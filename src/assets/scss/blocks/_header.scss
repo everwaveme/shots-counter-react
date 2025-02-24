@@ -13,11 +13,19 @@
 }
 
 .header-logo {
+  text-decoration: none;
+  
+  &:hover {
+    opacity: .8;
+  }
+}
+
+.header-title {
   font-family: $header-font;
   font-size: 22px;
   font-weight: 700;
-  text-decoration: none;
   color: $color-light;
+  text-align: center;
   transition: all .3s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
 
   span {
@@ -31,10 +39,6 @@
 
   &::selection {
     background-color: $color-accent;
-  }
-
-  &:hover {
-    opacity: .8;
   }
 
   @media (max-width: $mobile-max) {

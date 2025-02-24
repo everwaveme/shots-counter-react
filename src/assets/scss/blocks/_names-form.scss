@@ -1,0 +1,121 @@
+.names-form {
+  margin-top: 100px;
+  padding: 50px 0;
+  opacity: 0;
+  transition: all 1s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+
+  @media (max-width: $tablet-max) {
+    margin-top: 80px;
+    padding: 40px 0;
+  }
+
+  @media (max-width: $mobile-max) {
+    margin-top: 60px;
+    padding: 30px 0;
+  }
+}
+
+.names-form-show {
+  opacity: 1;
+  transition: all 1s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+
+.names-form-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.names-form-box {
+  flex-basis: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: $tablet-max) {
+    flex-basis: 50%;
+  }
+
+  @media (max-width: $mobile-max) {
+    flex-basis: 60%;
+  }
+}
+
+.names-form-title {
+  margin-bottom: 40px;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.names-form-input-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 0 -5px 10px;
+
+  @media (max-width: $mobile-max) {
+    margin: 0 -5px;
+    flex-wrap: wrap;
+  }
+}
+
+.names-form-input {
+  margin: 0 5px;
+  padding: 10px 20px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: inherit;
+  color: $color-light;
+  background-color: $color-semidark;
+  border: none;
+  border-radius: 10px;
+
+  &:focus {
+    outline: none;
+    border: 1px solid rgba($color-accent, 1);
+    box-shadow: 0 0 10px rgba($color-accent, .3);
+  }
+
+  @media (max-width: $mobile-max) {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+}
+
+.names-form-btn {
+  display: block;
+  padding: 10px;
+  width: 100%;
+  font-family: $main-font;
+  font-size: 18px;
+  font-weight: 600;
+  color: $color-light;
+  border: none;
+  background: transparent;
+  background-color: $color-accent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .1s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+
+  &:hover {
+    opacity: .9;
+  }
+
+  &:active {
+    opacity: .8;
+    transform: translateY(1px);
+  }
+
+  @media (max-width: $mobile-max) {
+    font-size: 16px;
+  }
+}
+
+.name-form-error {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #ec2049;
+}
