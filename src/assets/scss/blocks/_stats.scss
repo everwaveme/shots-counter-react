@@ -147,7 +147,7 @@
   display: block;
   max-width: 140px;
   width: 100%;
-  padding: 7px;
+  padding: 6px;
   font-family: $main-font;
   font-size: 16px;
   font-weight: 600;
@@ -183,9 +183,10 @@
 }
 
 .stats-reset-all-btn {
+  border: 2px solid $color-accent;
+
   &:hover {
     background-color: transparent;
-    border: 2px solid $color-accent;
   }
 
   &:active {

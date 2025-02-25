@@ -9,6 +9,7 @@ function NamesForm() {
   const [isNamesConfirmed, setIsNamesConfirmed] = useState(false);
   const [isConfirmError, setConfirmError] = useState(false);
   const [isChangeBtnName, setIsChangeBtnName] = useState(false);
+
   const [names, setNames] = useState({
     firstPlayer: '',
     secondPlayer: '',
@@ -26,16 +27,20 @@ function NamesForm() {
         setConfirmError(false);
       }
 
-      setTimeout(() => {
-        setIsNamesConfirmed(true);;
-      }, 1000);
       setIsChangeBtnName(true);
+
+      setTimeout(() => {
+        setIsNamesConfirmed(true);
+      }, 1500);
+
       setTimeout(() => {
         setIsShowForm(false);
-      }, 1500);
+      }, 500);
+
       setTimeout(() => {
         setIsShowMainComps(true);
       }, 1700);
+
     } else {
       setConfirmError(true);
     }
