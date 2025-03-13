@@ -24,6 +24,7 @@
   font-family: $header-font;
   font-size: 22px;
   font-weight: 700;
+  line-height: 1.5em;
   color: $color-light;
   text-align: center;
   transition: all .3s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
@@ -44,5 +45,6 @@
   @media (max-width: $mobile-max) {
     font-size: 20px;
     font-weight: 600;
+    line-height: 1.5em;
   }
 }
