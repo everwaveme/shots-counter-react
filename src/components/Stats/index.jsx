@@ -1,535 +1,521 @@
 import { useState, useEffect } from "react";
+import useHistory from "../../hooks/useHistory";
 
 function Stats() {
-  //First player stats state
-  const [firstPlayerStats, setFirstPlayerStats] = useState({
-    potSuccess: {
-      potted: 0,
-      allShots: 0,
-    },
-    longPotSuccess: {
-      potted: 0,
-      allShots: 0,
-    },
-    restPotSuccess: {
-      potted: 0,
-      allShots: 0,
-    },
-    safetySuccess: {
-      success: 0,
-      allShots: 0,
-    }
-  });
-
-  const [firstPlayerPer, setFirstPlayerPer] = useState({
-    potSuccessPer: 0,
-    longPotSuccessPer: 0,
-    restPotSuccessPer: 0,
-    safetySuccessPer: 0,
-  });
-
-  useEffect(() => {
-    setFirstPlayerPer({
-      ...firstPlayerPer,
-      potSuccessPer: firstPlayerStats.potSuccess.potted / firstPlayerStats.potSuccess.allShots * 100 || 0,
-      longPotSuccessPer: firstPlayerStats.longPotSuccess.potted / firstPlayerStats.longPotSuccess.allShots * 100 || 0,
-      restPotSuccessPer: firstPlayerStats.restPotSuccess.potted / firstPlayerStats.restPotSuccess.allShots * 100 || 0,
-      safetySuccessPer: firstPlayerStats.safetySuccess.success / firstPlayerStats.safetySuccess.allShots * 100 || 0,
-    });
-  }, [firstPlayerStats]);
-
-  //Second player stats state
-  const [secondPlayerStats, setSecondPlayerStats] = useState({
-    potSuccess: {
-      potted: 0,
-      allShots: 0,
-    },
-    longPotSuccess: {
-      potted: 0,
-      allShots: 0,
-    },
-    restPotSuccess: {
-      potted: 0,
-      allShots: 0,
-    },
-    safetySuccess: {
-      success: 0,
-      allShots: 0,
-    }
-  });
-
-  const [secondPlayerPer, setSecondPlayerPer] = useState({
-    potSuccessPer: 0,
-    longPotSuccessPer: 0,
-    restPotSuccessPer: 0,
-    safetySuccessPer: 0,
-  });
-
-  useEffect(() => {
-    setSecondPlayerPer({
-      ...secondPlayerPer,
-      potSuccessPer: secondPlayerStats.potSuccess.potted / secondPlayerStats.potSuccess.allShots * 100 || 0,
-      longPotSuccessPer: secondPlayerStats.longPotSuccess.potted / secondPlayerStats.longPotSuccess.allShots * 100 || 0,
-      restPotSuccessPer: secondPlayerStats.restPotSuccess.potted / secondPlayerStats.restPotSuccess.allShots * 100 || 0,
-      safetySuccessPer: secondPlayerStats.safetySuccess.success / secondPlayerStats.safetySuccess.allShots * 100 || 0,
-    });
-  }, [secondPlayerStats]);
-
-  //Reset buttons
-  const resetFirstPlayerStats = () => {
-    setFirstPlayerStats({
-      ...firstPlayerStats,
+  const [stats, setStats, undo, redo, history, index] = useHistory({
+    firstPlayer: {
       potSuccess: {
-        ...firstPlayerStats.potSuccess,
         potted: 0,
         allShots: 0,
       },
       longPotSuccess: {
-        ...firstPlayerStats.longPotSuccess,
         potted: 0,
         allShots: 0,
       },
       restPotSuccess: {
-        ...firstPlayerStats.restPotSuccess,
         potted: 0,
         allShots: 0,
       },
       safetySuccess: {
-        ...firstPlayerStats.safetySuccess,
         success: 0,
         allShots: 0,
-      },
-    });
-  };
+      }
+    },
 
-  const resetSecondPlayerStats = () => {
-    setSecondPlayerStats({
-      ...secondPlayerStats,
+    secondPlayer: {
       potSuccess: {
-        ...secondPlayerStats.potSuccess,
         potted: 0,
         allShots: 0,
       },
       longPotSuccess: {
-        ...secondPlayerStats.longPotSuccess,
         potted: 0,
         allShots: 0,
       },
       restPotSuccess: {
-        ...secondPlayerStats.restPotSuccess,
         potted: 0,
         allShots: 0,
       },
       safetySuccess: {
-        ...secondPlayerStats.safetySuccess,
         success: 0,
         allShots: 0,
-      },
-    });
-  };
+      }
+    }
+  });
 
-  const resetAllStats = () => {
-    resetFirstPlayerStats();
-    resetSecondPlayerStats();
+  const [percentage, setPercentage] = useState({
+    firstPlayerPer: {
+      potSuccessPer: 0,
+      longPotSuccessPer: 0,
+      restPotSuccessPer: 0,
+      safetySuccessPer: 0,
+    },
+    secondPlayerPer: {
+      potSuccessPer: 0,
+      longPotSuccessPer: 0,
+      restPotSuccessPer: 0,
+      safetySuccessPer: 0,
+    }
+  });
+
+  useEffect(() => {
+    setPercentage({
+      ...percentage,
+      firstPlayerPer: {
+        potSuccessPer: stats.firstPlayer.potSuccess.potted / stats.firstPlayer.potSuccess.allShots * 100 || 0,
+        longPotSuccessPer: stats.firstPlayer.longPotSuccess.potted / stats.firstPlayer.longPotSuccess.allShots * 100 || 0,
+        restPotSuccessPer: stats.firstPlayer.restPotSuccess.potted / stats.firstPlayer.restPotSuccess.allShots * 100 || 0,
+        safetySuccessPer: stats.firstPlayer.safetySuccess.success / stats.firstPlayer.safetySuccess.allShots * 100 || 0,
+      },
+      secondPlayerPer: {
+        potSuccessPer: stats.secondPlayer.potSuccess.potted / stats.secondPlayer.potSuccess.allShots * 100 || 0,
+        longPotSuccessPer: stats.secondPlayer.longPotSuccess.potted / stats.secondPlayer.longPotSuccess.allShots * 100 || 0,
+        restPotSuccessPer: stats.secondPlayer.restPotSuccess.potted / stats.secondPlayer.restPotSuccess.allShots * 100 || 0,
+        safetySuccessPer: stats.secondPlayer.safetySuccess.success / stats.secondPlayer.safetySuccess.allShots * 100 || 0,
+      }
+    });
+  }, [stats]);
+
+  const clearStats = () => {
+    setStats(history[0]);
   };
 
   return (
     <section className="stats">
       <div className="container">
+        <div className="stats-table">
 
-        {/* POT SUCCESS  */}
-        <div className="stats-card">
-          <div className="stats-player">
-            <span className="stats-player-info">
-              {firstPlayerPer.potSuccessPer.toFixed(2)}%
-              ({firstPlayerStats.potSuccess.potted}/{firstPlayerStats.potSuccess.allShots})
-            </span>
-            <div className="stats-player-btns">
-              <button
-                className="stats-potted-btn"
-                onClick={() => {
-                  setFirstPlayerStats({
-                    ...firstPlayerStats,
-                    potSuccess: {
-                      ...firstPlayerStats.potSuccess,
-                      potted: firstPlayerStats.potSuccess.potted + 1,
-                      allShots: firstPlayerStats.potSuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
-              <button
-                className="stats-missed-btn"
-                onClick={() => {
-                  setFirstPlayerStats({
-                    ...firstPlayerStats,
-                    potSuccess: {
-                      ...firstPlayerStats.potSuccess,
-                      allShots: firstPlayerStats.potSuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
+          {/* POT SUCCESS  */}
+          <div className="stats-field">
+            <div className="stats-player">
+              <span className="stats-player-info">
+                {percentage.firstPlayerPer.potSuccessPer.toFixed(2)}%
+                ({stats.firstPlayer.potSuccess.potted}/{stats.firstPlayer.potSuccess.allShots})
+              </span>
+              <div className="stats-player-btns">
+                <button
+                  className="stats-potted-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      firstPlayer: {
+                        ...stats.firstPlayer,
+                        potSuccess: {
+                          ...stats.firstPlayer.potSuccess,
+                          potted: stats.firstPlayer.potSuccess.potted + 1,
+                          allShots: stats.firstPlayer.potSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+                <button
+                  className="stats-missed-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      firstPlayer: {
+                        ...stats.firstPlayer,
+                        potSuccess: {
+                          ...stats.firstPlayer.potSuccess,
+                          allShots: stats.firstPlayer.potSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+              </div>
+            </div>
+
+            <div className="stats-text">
+              <span className="stats-title">
+                Pot Success
+              </span>
+            </div>
+
+            <div className="stats-player">
+              <span className="stats-player-info">
+                {percentage.secondPlayerPer.potSuccessPer.toFixed(2)}%
+                ({stats.secondPlayer.potSuccess.potted}/{stats.secondPlayer.potSuccess.allShots})
+              </span>
+              <div className="stats-player-btns">
+                <button
+                  className="stats-potted-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      secondPlayer: {
+                        ...stats.secondPlayer,
+                        potSuccess: {
+                          ...stats.secondPlayer.potSuccess,
+                          potted: stats.secondPlayer.potSuccess.potted + 1,
+                          allShots: stats.secondPlayer.potSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+                <button
+                  className="stats-missed-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      secondPlayer: {
+                        ...stats.secondPlayer,
+                        potSuccess: {
+                          ...stats.secondPlayer.potSuccess,
+                          allShots: stats.secondPlayer.potSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+              </div>
             </div>
           </div>
 
-          <div className="stats-text">
-            <span className="stats-title">
-              Pot Success
-            </span>
-          </div>
-
-          <div className="stats-player">
-            <span className="stats-player-info">
-              {secondPlayerPer.potSuccessPer.toFixed(2)}%
-              ({secondPlayerStats.potSuccess.potted}/{secondPlayerStats.potSuccess.allShots})
-            </span>
-            <div className="stats-player-btns">
-              <button
-                className="stats-potted-btn"
-                onClick={() => {
-                  setSecondPlayerStats({
-                    ...secondPlayerStats,
-                    potSuccess: {
-                      ...secondPlayerStats.potSuccess,
-                      potted: secondPlayerStats.potSuccess.potted + 1,
-                      allShots: secondPlayerStats.potSuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
-              <button
-                className="stats-missed-btn"
-                onClick={() => {
-                  setSecondPlayerStats({
-                    ...secondPlayerStats,
-                    potSuccess: {
-                      ...secondPlayerStats.potSuccess,
-                      allShots: secondPlayerStats.potSuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
+          {/* LONG POT SUCCESS */}
+          <div className="stats-field">
+            <div className="stats-player">
+              <span className="stats-player-info">
+                {percentage.firstPlayerPer.longPotSuccessPer.toFixed(2)}%
+                ({stats.firstPlayer.longPotSuccess.potted}/{stats.firstPlayer.longPotSuccess.allShots})
+              </span>
+              <div className="stats-player-btns">
+                <button className="stats-potted-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      firstPlayer: {
+                        ...stats.firstPlayer,
+                        potSuccess: {
+                          ...stats.firstPlayer.potSuccess,
+                          potted: stats.firstPlayer.potSuccess.potted + 1,
+                          allShots: stats.firstPlayer.potSuccess.allShots + 1,
+                        },
+                        longPotSuccess: {
+                          ...stats.firstPlayer.longPotSuccess,
+                          potted: stats.firstPlayer.longPotSuccess.potted + 1,
+                          allShots: stats.firstPlayer.longPotSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+                <button className="stats-missed-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      firstPlayer: {
+                        ...stats.firstPlayer,
+                        potSuccess: {
+                          ...stats.firstPlayer.potSuccess,
+                          allShots: stats.firstPlayer.potSuccess.allShots + 1,
+                        },
+                        longPotSuccess: {
+                          ...stats.firstPlayer.longPotSuccess,
+                          allShots: stats.firstPlayer.longPotSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* LONG POT SUCCESS */}
-        <div className="stats-card">
-          <div className="stats-player">
-            <span className="stats-player-info">
-              {firstPlayerPer.longPotSuccessPer.toFixed(2)}%
-              ({firstPlayerStats.longPotSuccess.potted}/{firstPlayerStats.longPotSuccess.allShots})
-            </span>
-            <div className="stats-player-btns">
-              <button className="stats-potted-btn"
-                onClick={() => {
-                  setFirstPlayerStats({
-                    ...firstPlayerStats,
-                    potSuccess: {
-                      ...firstPlayerStats.potSuccess,
-                      potted: firstPlayerStats.potSuccess.potted + 1,
-                      allShots: firstPlayerStats.potSuccess.allShots + 1,
-                    },
-                    longPotSuccess: {
-                      ...firstPlayerStats.longPotSuccess,
-                      potted: firstPlayerStats.longPotSuccess.potted + 1,
-                      allShots: firstPlayerStats.longPotSuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
-              <button className="stats-missed-btn"
-                onClick={() => {
-                  setFirstPlayerStats({
-                    ...firstPlayerStats,
-                    potSuccess: {
-                      ...firstPlayerStats.potSuccess,
-                      allShots: firstPlayerStats.potSuccess.allShots + 1,
-                    },
-                    longPotSuccess: {
-                      ...firstPlayerStats.longPotSuccess,
-                      allShots: firstPlayerStats.longPotSuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
+            <div className="stats-text">
+              <span className="stats-title">
+                Long Pot Success
+              </span>
             </div>
-          </div>
 
-          <div className="stats-text">
-            <span className="stats-title">
-              Long Pot Success
-            </span>
-          </div>
-
-          <div className="stats-player">
-            <span className="stats-player-info">
-              {secondPlayerPer.longPotSuccessPer.toFixed(2)}%
-              ({secondPlayerStats.longPotSuccess.potted}/{secondPlayerStats.longPotSuccess.allShots})
-            </span>
-            <div className="stats-player-btns">
-              <button className="stats-potted-btn"
-                onClick={() => {
-                  setSecondPlayerStats({
-                    ...secondPlayerStats,
-                    potSuccess: {
-                      ...secondPlayerStats.potSuccess,
-                      potted: secondPlayerStats.potSuccess.potted + 1,
-                      allShots: secondPlayerStats.potSuccess.allShots + 1,
-                    },
-                    longPotSuccess: {
-                      ...secondPlayerStats.longPotSuccess,
-                      potted: secondPlayerStats.longPotSuccess.potted + 1,
-                      allShots: secondPlayerStats.longPotSuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
-              <button className="stats-missed-btn"
-                onClick={() => {
-                  setSecondPlayerStats({
-                    ...secondPlayerStats,
-                    potSuccess: {
-                      ...secondPlayerStats.potSuccess,
-                      allShots: secondPlayerStats.potSuccess.allShots + 1,
-                    },
-                    longPotSuccess: {
-                      ...secondPlayerStats.longPotSuccess,
-                      allShots: secondPlayerStats.longPotSuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* REST POT SUCCESS */}
-        <div className="stats-card">
-          <div className="stats-player">
-            <span className="stats-player-info">
-              {firstPlayerPer.restPotSuccessPer.toFixed(2)}%
-              ({firstPlayerStats.restPotSuccess.potted}/{firstPlayerStats.restPotSuccess.allShots})
-            </span>
-            <div className="stats-player-btns">
-              <button className="stats-potted-btn"
-                onClick={() => {
-                  setFirstPlayerStats({
-                    ...firstPlayerStats,
-                    potSuccess: {
-                      ...firstPlayerStats.potSuccess,
-                      potted: firstPlayerStats.potSuccess.potted + 1,
-                      allShots: firstPlayerStats.potSuccess.allShots + 1,
-                    },
-                    restPotSuccess: {
-                      ...firstPlayerStats.restPotSuccess,
-                      potted: firstPlayerStats.restPotSuccess.potted + 1,
-                      allShots: firstPlayerStats.restPotSuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
-              <button className="stats-missed-btn"
-                onClick={() => {
-                  setFirstPlayerStats({
-                    ...firstPlayerStats,
-                    potSuccess: {
-                      ...firstPlayerStats.potSuccess,
-                      allShots: firstPlayerStats.potSuccess.allShots + 1,
-                    },
-                    restPotSuccess: {
-                      ...firstPlayerStats.restPotSuccess,
-                      allShots: firstPlayerStats.restPotSuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
+            <div className="stats-player">
+              <span className="stats-player-info">
+                {percentage.secondPlayerPer.longPotSuccessPer.toFixed(2)}%
+                ({stats.secondPlayer.longPotSuccess.potted}/{stats.secondPlayer.longPotSuccess.allShots})
+              </span>
+              <div className="stats-player-btns">
+                <button className="stats-potted-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      secondPlayer: {
+                        ...stats.secondPlayer,
+                        potSuccess: {
+                          ...stats.secondPlayer.potSuccess,
+                          potted: stats.secondPlayer.potSuccess.potted + 1,
+                          allShots: stats.secondPlayer.potSuccess.allShots + 1,
+                        },
+                        longPotSuccess: {
+                          ...stats.secondPlayer.longPotSuccess,
+                          potted: stats.secondPlayer.longPotSuccess.potted + 1,
+                          allShots: stats.secondPlayer.longPotSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+                <button className="stats-missed-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      secondPlayer: {
+                        ...stats.secondPlayer,
+                        potSuccess: {
+                          ...stats.secondPlayer.potSuccess,
+                          allShots: stats.secondPlayer.potSuccess.allShots + 1,
+                        },
+                        longPotSuccess: {
+                          ...stats.secondPlayer.longPotSuccess,
+                          allShots: stats.secondPlayer.longPotSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+              </div>
             </div>
           </div>
 
-          <div className="stats-text">
-            <span className="stats-title">
-              Rest Pot Success
-            </span>
+          {/* REST POT SUCCESS */}
+          <div className="stats-field">
+            <div className="stats-player">
+              <span className="stats-player-info">
+                {percentage.firstPlayerPer.restPotSuccessPer.toFixed(2)}%
+                ({stats.firstPlayer.restPotSuccess.potted}/{stats.firstPlayer.restPotSuccess.allShots})
+              </span>
+              <div className="stats-player-btns">
+                <button className="stats-potted-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      firstPlayer: {
+                        ...stats.firstPlayer,
+                        potSuccess: {
+                          ...stats.firstPlayer.potSuccess,
+                          potted: stats.firstPlayer.potSuccess.potted + 1,
+                          allShots: stats.firstPlayer.potSuccess.allShots + 1,
+                        },
+                        restPotSuccess: {
+                          ...stats.firstPlayer.restPotSuccess,
+                          potted: stats.firstPlayer.restPotSuccess.potted + 1,
+                          allShots: stats.firstPlayer.restPotSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+                <button className="stats-missed-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      firstPlayer: {
+                        ...stats.firstPlayer,
+                        potSuccess: {
+                          ...stats.firstPlayer.potSuccess,
+                          allShots: stats.firstPlayer.potSuccess.allShots + 1,
+                        },
+                        restPotSuccess: {
+                          ...stats.firstPlayer.restPotSuccess,
+                          allShots: stats.firstPlayer.restPotSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+              </div>
+            </div>
+
+            <div className="stats-text">
+              <span className="stats-title">
+                Rest Pot Success
+              </span>
+            </div>
+
+            <div className="stats-player">
+              <span className="stats-player-info">
+                {percentage.secondPlayerPer.restPotSuccessPer.toFixed(2)}%
+                ({stats.secondPlayer.restPotSuccess.potted}/{stats.secondPlayer.restPotSuccess.allShots})
+              </span>
+              <div className="stats-player-btns">
+                <button className="stats-potted-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      secondPlayer: {
+                        ...stats.secondPlayer,
+                        potSuccess: {
+                          ...stats.secondPlayer.potSuccess,
+                          potted: stats.secondPlayer.potSuccess.potted + 1,
+                          allShots: stats.secondPlayer.potSuccess.allShots + 1,
+                        },
+                        restPotSuccess: {
+                          ...stats.secondPlayer.restPotSuccess,
+                          potted: stats.secondPlayer.restPotSuccess.potted + 1,
+                          allShots: stats.secondPlayer.restPotSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+                <button className="stats-missed-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      secondPlayer: {
+                        ...stats.secondPlayer,
+                        potSuccess: {
+                          ...stats.secondPlayer.potSuccess,
+                          allShots: stats.secondPlayer.potSuccess.allShots + 1,
+                        },
+                        restPotSuccess: {
+                          ...stats.secondPlayer.restPotSuccess,
+                          allShots: stats.secondPlayer.restPotSuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div className="stats-player">
-            <span className="stats-player-info">
-              {secondPlayerPer.restPotSuccessPer.toFixed(2)}%
-              ({secondPlayerStats.restPotSuccess.potted}/{secondPlayerStats.restPotSuccess.allShots})
-            </span>
-            <div className="stats-player-btns">
-              <button className="stats-potted-btn"
-                onClick={() => {
-                  setSecondPlayerStats({
-                    ...secondPlayerStats,
-                    potSuccess: {
-                      ...secondPlayerStats.potSuccess,
-                      potted: secondPlayerStats.potSuccess.potted + 1,
-                      allShots: secondPlayerStats.potSuccess.allShots + 1,
-                    },
-                    restPotSuccess: {
-                      ...secondPlayerStats.restPotSuccess,
-                      potted: secondPlayerStats.restPotSuccess.potted + 1,
-                      allShots: secondPlayerStats.restPotSuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
-              <button className="stats-missed-btn"
-                onClick={() => {
-                  setSecondPlayerStats({
-                    ...secondPlayerStats,
-                    potSuccess: {
-                      ...secondPlayerStats.potSuccess,
-                      allShots: secondPlayerStats.potSuccess.allShots + 1,
-                    },
-                    restPotSuccess: {
-                      ...secondPlayerStats.restPotSuccess,
-                      allShots: secondPlayerStats.restPotSuccess.allShots + 1,
-                    }
-                  });
-                }}
+          {/* SAFETY SUCCESS */}
+          <div className="stats-field">
+            <div className="stats-player">
+              <span className="stats-player-info">
+                {percentage.firstPlayerPer.safetySuccessPer.toFixed(2)}%
+                ({stats.firstPlayer.safetySuccess.success}/{stats.firstPlayer.safetySuccess.allShots})
+              </span>
+              <div className="stats-player-btns">
+                <button className="stats-potted-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      firstPlayer: {
+                        ...stats.firstPlayer,
+                        safetySuccess: {
+                          ...stats.firstPlayer.safetySuccess,
+                          success: stats.firstPlayer.safetySuccess.success + 1,
+                          allShots: stats.firstPlayer.safetySuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+                <button className="stats-missed-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      firstPlayer: {
+                        ...stats.firstPlayer,
+                        safetySuccess: {
+                          ...stats.firstPlayer.safetySuccess,
+                          allShots: stats.firstPlayer.safetySuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+              </div>
+            </div>
+
+            <div className="stats-text">
+              <span className="stats-title">
+                Safety Success
+              </span>
+            </div>
+
+            <div className="stats-player">
+              <span className="stats-player-info">
+                {percentage.secondPlayerPer.safetySuccessPer.toFixed(2)}%
+                ({stats.secondPlayer.safetySuccess.success}/{stats.secondPlayer.safetySuccess.allShots})
+              </span>
+              <div className="stats-player-btns">
+                <button className="stats-potted-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      secondPlayer: {
+                        ...stats.secondPlayer,
+                        safetySuccess: {
+                          ...stats.secondPlayer.safetySuccess,
+                          success: stats.secondPlayer.safetySuccess.success + 1,
+                          allShots: stats.secondPlayer.safetySuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+                <button className="stats-missed-btn"
+                  onClick={() => {
+                    setStats({
+                      ...stats,
+                      secondPlayer: {
+                        ...stats.secondPlayer,
+                        safetySuccess: {
+                          ...stats.secondPlayer.safetySuccess,
+                          allShots: stats.secondPlayer.safetySuccess.allShots + 1,
+                        }
+                      }
+                    });
+                  }}
+                >
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* ALL POTTED BALLS */}
+          <div className="stats-field">
+            <div className="stats-player">
+              <span className="stats-player-info all-potted-balls-info">
+                {stats.firstPlayer.potSuccess.potted}
+              </span>
+            </div>
+
+            <div className="stats-text">
+              <span className="stats-title">
+                All Potted Balls
+              </span>
+            </div>
+
+            <div className="stats-player">
+              <span className="stats-player-info all-potted-balls-info">
+                {stats.secondPlayer.potSuccess.potted}
+              </span>
+            </div>
+          </div>
+
+          {/* BUTTONS */}
+          <div className="stats-btns-wrap">
+            <div className="stats-undo-btn-wrap">
+              <button className="stats-undo-btn"
+                onClick={undo}
               >
               </button>
             </div>
-          </div>
-        </div>
 
-        {/* SAFETY SUCCESS */}
-        <div className="stats-card">
-          <div className="stats-player">
-            <span className="stats-player-info">
-              {firstPlayerPer.safetySuccessPer.toFixed(2)}%
-              ({firstPlayerStats.safetySuccess.success}/{firstPlayerStats.safetySuccess.allShots})
-            </span>
-            <div className="stats-player-btns">
-              <button className="stats-potted-btn"
-                onClick={() => {
-                  setFirstPlayerStats({
-                    ...firstPlayerStats,
-                    safetySuccess: {
-                      ...firstPlayerStats.safetySuccess,
-                      success: firstPlayerStats.safetySuccess.success + 1,
-                      allShots: firstPlayerStats.safetySuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
-              <button className="stats-missed-btn"
-                onClick={() => {
-                  setFirstPlayerStats({
-                    ...firstPlayerStats,
-                    safetySuccess: {
-                      ...firstPlayerStats.safetySuccess,
-                      allShots: firstPlayerStats.safetySuccess.allShots + 1,
-                    }
-                  });
-                }}
+            <div className="stats-clear-btn-wrap">
+              <button className="stats-clear-btn"
+                onClick={clearStats}
               >
               </button>
             </div>
-          </div>
-
-          <div className="stats-text">
-            <span className="stats-title">
-              Safety Success
-            </span>
-          </div>
-
-          <div className="stats-player">
-            <span className="stats-player-info">
-              {secondPlayerPer.safetySuccessPer.toFixed(2)}%
-              ({secondPlayerStats.safetySuccess.success}/{secondPlayerStats.safetySuccess.allShots})
-            </span>
-            <div className="stats-player-btns">
-              <button className="stats-potted-btn"
-                onClick={() => {
-                  setSecondPlayerStats({
-                    ...secondPlayerStats,
-                    safetySuccess: {
-                      ...secondPlayerStats.safetySuccess,
-                      success: secondPlayerStats.safetySuccess.success + 1,
-                      allShots: secondPlayerStats.safetySuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
-              <button className="stats-missed-btn"
-                onClick={() => {
-                  setSecondPlayerStats({
-                    ...secondPlayerStats,
-                    safetySuccess: {
-                      ...secondPlayerStats.safetySuccess,
-                      allShots: secondPlayerStats.safetySuccess.allShots + 1,
-                    }
-                  });
-                }}
-              >
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* ALL POTTED BALLS */}
-        <div className="stats-card">
-          <div className="stats-player">
-            <span className="stats-player-info all-potted-balls-info">
-              {firstPlayerStats.potSuccess.potted}
-            </span>
-          </div>
-
-          <div className="stats-text">
-            <span className="stats-title">
-              All Potted Balls
-            </span>
-          </div>
-
-          <div className="stats-player">
-            <span className="stats-player-info all-potted-balls-info">
-              {secondPlayerStats.potSuccess.potted}
-            </span>
-          </div>
-        </div>
-
-        {/* RESET BUTTONS */}
-        <div className="stats-card">
-          <div className="stats-reset-btn-wrap">
-            <button className="stats-reset-btn"
-              onClick={resetFirstPlayerStats}
-            >
-              Reset
-            </button>
-          </div>
-
-          <div className="stats-reset-btn-wrap">
-            <button className="stats-reset-all-btn"
-              onClick={resetAllStats}
-            >
-              Reset All
-            </button>
-          </div>
-
-          <div className="stats-reset-btn-wrap">
-            <button className="stats-reset-btn"
-              onClick={resetSecondPlayerStats}
-            >
-              Reset
-            </button>
           </div>
         </div>
       </div>

@@ -8,18 +8,25 @@
   }
 }
 
-.stats-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px 0;
+.stats-table {
   padding: 30px;
   background-color: $color-semidark;
   border-radius: 10px;
 
   @media (max-width: $mobile-max) {
     margin: 15px 0;
-    padding: 20px;
+    // padding: 20px;
+  }
+}
+
+.stats-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+
+  @media (max-width: $mobile-max) {
+    // margin: 15px 0;
   }
 }
 
@@ -32,9 +39,9 @@
 }
 
 .stats-player-info {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.5em;
   text-align: center;
 
@@ -61,7 +68,7 @@
 .stats-missed-btn {
   display: block;
   width: 60px;
-  height: 30px;
+  height: 35px;
   border: none;
   background: transparent;
   background-repeat: no-repeat;
@@ -129,7 +136,7 @@
 
 .stats-title {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.5em;
   color: $color-accent;
 
@@ -139,44 +146,39 @@
   }
 }
 
-.stats-reset-btn-wrap {
-  flex-basis: 30%;
+.stats-btns-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.stats-reset-btn,
-.stats-reset-all-btn {
-  display: block;
-  max-width: 140px;
-  width: 100%;
-  padding: 6px;
-  font-family: $main-font;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.5em;
-  color: $color-light;
-  border: none;
-  background: transparent;
-  background-color: $color-accent;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all .1s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+  padding: 30px 0;
 
   @media (max-width: $mobile-max) {
-    max-width: 100px;
-    padding: 5px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.5em;
-    border-radius: 7px;
+    // margin: 15px 0;
   }
 }
 
-.stats-reset-btn {
-  background-color: transparent;
-  border: 2px solid $color-accent;
+.stats-undo-btn-wrap,
+.stats-clear-btn-wrap {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 15px;
+}
+
+.stats-undo-btn,
+.stats-clear-btn {
+  display: block;
+  max-width: 130px;
+  width: 100%;
+  height: 40px;
+  background-color: $color-undo-clear-btn;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all .2s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
 
   &:hover {
     background-color: $color-accent;
@@ -186,21 +188,18 @@
     opacity: .8;
     transform: translateY(1px);
   }
-}
-
-.stats-reset-all-btn {
-  border: 2px solid $color-accent;
-
-  &:hover {
-    background-color: transparent;
-  }
-
-  &:active {
-    opacity: .8;
-    transform: translateY(1px);
-  }
 
   @media (max-width: $mobile-max) {
-    margin: 0 5px;
+    max-width: 100px;
   }
+}
+
+.stats-undo-btn {
+  background-image: url(../../undo-icon.png);
+  background-size: 20px;
+}
+
+.stats-clear-btn {
+  background-image: url(../../clear-icon.png);
+  background-size: 19px;
 }
