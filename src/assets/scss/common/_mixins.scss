@@ -1,4 +1,4 @@
-@mixin container($width: 1000px) {
+@mixin container($width: 950px) {
   max-width: $width + $gap;
   margin: 0 auto;
   padding: 0 $gap-half;
