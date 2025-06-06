@@ -8,8 +8,26 @@
 
 .footer-wrap {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.footer-google-play-link {
+  display: block;
+  margin-bottom: 25px;
+  min-width: 120px;
+  height: 35px;
+  background-image: url('../../google-play-icon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+  transition: all .2s 0s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+
+  &:hover {
+    opacity: .5;
+  }
 }
 
 .footer-copyright-link {
